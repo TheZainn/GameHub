@@ -18,6 +18,31 @@ toggleBtn.addEventListener("click", () => {
   updateMode(isDark);
 });
 
+// Simulasi login sukses
+const isLoggedIn = true;
+const username = "Gamer123";
+const profileImg = "images/profile-user.png"; // ganti dengan path yang sesuai
+
+document.addEventListener("DOMContentLoaded", function () {
+  if (isLoggedIn) {
+    document.querySelector(".auth-buttons").classList.add("d-none");
+    const userInfo = document.querySelector(".user-info");
+    userInfo.classList.remove("d-none");
+    userInfo.querySelector("img").src = profileImg;
+    userInfo.querySelector(".username").textContent = username;
+  }
+
+  // Keranjang
+  const cart = [];
+  document.querySelectorAll(".add-to-cart").forEach((btn) => {
+    btn.addEventListener("click", function () {
+      const productName = this.dataset.product;
+      cart.push(productName);
+      alert(`Ditambahkan ke keranjang: ${productName}`);
+    });
+  });
+});
+
 (function ($) {
   "use strict";
 
@@ -42,16 +67,16 @@ toggleBtn.addEventListener("click", () => {
 
   var initSwiper = function () {
     var swiper = new Swiper(".main-swiper", {
-  loop: true,
-  autoplay: {
-    delay: 3000, // 3 detik
-    disableOnInteraction: false,
-  },
-  pagination: {
-    el: ".swiper-pagination",
-    clickable: true,
-  },
-});
+      loop: true,
+      autoplay: {
+        delay: 3000, // 3 detik
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true,
+      },
+    });
 
     var category_swiper = new Swiper(".category-carousel", {
       slidesPerView: 6,
