@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login and Signup</title>
+  <link rel="stylesheet" href="login.css" />
+  <link href="https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css" rel="stylesheet" />
+</head>
+<body>
+  <section class="container forms">
+    <div class="form login">
+      <div class="form-content">
+        <header>
+          <img src="logo.png" alt="GameHub Logo" class="logo">
+        </header>
+        <form id="loginForm">
+          <div class="field input-field">
+            <input type="email" placeholder="Email" class="input" required />
+          </div>
+          <div class="field input-field">
+            <input type="password" placeholder="Password" class="password" required />
+            <i class="bx bx-hide eye-icon"></i>
+          </div>
+          <div class="form-link">
+            <a href="#" class="forgot-pass">Forgot password?</a>
+          </div>
+          <div class="field button-field">
+            <button type="submit">Login</button>
+          </div>
+        </form>
+        <div class="form-link">
+          <span>Don't have an account? <a href="#" class="link signup-link">Signup</a></span>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="media-options">
+        <a href="#" class="field google">
+          <img src="google.png" alt="Google" class="google-img">
+          <span>Login with Google</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Signup Form -->
+    <div class="form signup">
+      <div class="form-content">
+        <header>
+          <img src="logo.png" alt="GameHub Logo" class="logo">
+        </header>
+        <form id="signupForm">
+          <div class="field input-field">
+            <input type="text" placeholder="Username" class="username-input input" required />
+          </div>
+          <div class="field input-field">
+            <input type="email" placeholder="Email" class="input" required />
+          </div>
+          <div class="field input-field">
+            <input type="password" placeholder="Create password" class="password" required />
+          </div>
+          <div class="field input-field">
+            <input type="password" placeholder="Confirm password" class="password" required />
+            <i class="bx bx-hide eye-icon"></i>
+          </div>
+          <div class="field button-field">
+            <button type="submit">Signup</button>
+          </div>
+        </form>
+        <div class="form-link">
+          <span>Already have an account? <a href="#" class="link login-link">Login</a></span>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="media-options">
+        <a href="#" class="field google">
+          <img src="google.png" alt="Google" class="google-img">
+          <span>Signup with Google</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <div id="toast-container" class="toast-container"></div>
+
+
+  <!-- Firebase SDK & main.js -->
+  <script type="module" src="login.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js"></script>
+<script>
+  import { initializeApp } from "firebase/app";
+  import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
+  const firebaseConfig = { 
+  apiKey: "AIzaSyCSQmdLK-OiGoiLU64qVmGkL6yf9sAs2NA",
+  authDomain: "gamehub-e45b5.firebaseapp.com",
+  projectId: "gamehub-e45b5",
+  storageBucket: "gamehub-e45b5.firebasestorage.app",
+  messagingSenderId: "905356266272",
+  appId: "1:905356266272:web:4fa688b805ea088ffd2545"
+   };
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth();
+
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    try {
+      await signInWithEmailAndPassword(auth, email, password);
+      // Jika login berhasil, redirect ke dashboard.html
+      window.location.href = "index-logged-in.html";
+    } catch(error) {
+      alert("Login gagal: " + error.message);
+    }
+  });
+</script>
+</body>
+</html>
