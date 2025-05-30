@@ -138,7 +138,7 @@ loginForm.addEventListener("submit", async (e) => {
     }
 
     showToast("Login successful");
-    window.location.href = "index-logged.html";
+    window.location.href = "index-logged-in.html";
   } catch (err) {
     showToast("Login failed", true);
   }
